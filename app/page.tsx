@@ -19,7 +19,7 @@ import { CVView } from "./cv-page";
 import { Spinner } from "./spinner";
 
 
-export default function PortfolioSite() {
+function PortfolioContent() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
@@ -339,4 +339,20 @@ function GradientBackdrop() {
 
 function Logo() {
   return null;
+}
+
+function PageFallback() {
+  return (
+    <main className="min-h-screen bg-neutral-950 text-neutral-100 antialiased flex items-center justify-center">
+      <Spinner />
+    </main>
+  );
+}
+
+export default function PortfolioSite() {
+  return (
+    <React.Suspense fallback={<PageFallback />}>
+      <PortfolioContent />
+    </React.Suspense>
+  );
 }
