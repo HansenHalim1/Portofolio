@@ -4,10 +4,14 @@ import React from "react";
 import Link from "next/link";
 import { useSearchParams, usePathname } from "next/navigation";
 
-const DEMO_URL = "https://hansen-123-sms-spam-classifier.hf.space";
-const DEMO_TITLE = "SMS Spam Classifier — TF-IDF + Logistic Regression";
-const DEMO_DESC =
+const SMS_DEMO_URL = "https://hansen-123-sms-spam-classifier.hf.space";
+const SMS_DEMO_TITLE = "SMS Spam Classifier — TF-IDF + Logistic Regression";
+const SMS_DEMO_DESC =
   "Paste an SMS, tap Predict, and see latency + top contributing tokens. Hosted via Streamlit on Hugging Face Spaces.";
+const FORECAST_DEMO_URL = "https://hansen-123-demandforcasting.hf.space";
+const FORECAST_DEMO_TITLE = "Demand Forecasting — Walmart Sales Dashboard";
+const FORECAST_DEMO_DESC =
+  "Retrain a Gradient Boosting regressor on aggregated Walmart weekly sales, inspect validation metrics, and generate rolling forecasts.";
 const CV_URL = "/cv";
 const GITHUB_URL = "https://github.com/HansenHalim1";
 const LINKEDIN_URL = "https://www.linkedin.com/in/hansen-halim-2b7484274/";
@@ -31,14 +35,6 @@ function PortfolioContent() {
 
   const selectedSlug = slugFromPath ?? queryProject;
   const selectedProject = PROJECTS.find((project) => project.slug === selectedSlug);
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [isIframeVisible, setIsIframeVisible] = React.useState(false);
-
-  // Reveal the iframe after first paint to avoid layout shift
-  React.useEffect(() => {
-    const timeout = setTimeout(() => setIsIframeVisible(true), 500);
-    return () => clearTimeout(timeout);
-  }, []);
 
   if (pathname === "/cv" || viewMode === "cv") {
     return (
@@ -65,55 +61,7 @@ function PortfolioContent() {
       <Navbar />
       <Hero />
 
-      {/* Demo Section */}
-      <section id="demo" className="mx-auto max-w-6xl px-4 py-16">
-        <header className="mb-6 flex items-end justify-between gap-4">
-          <div>
-            <h2 className="text-2xl font-semibold tracking-tight">{DEMO_TITLE}</h2>
-            <p className="mt-1 text-neutral-400">{DEMO_DESC}</p>
-          </div>
-          <div className="flex items-center gap-3">
-            <a
-              href={DEMO_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-xl border border-neutral-800 px-4 py-2 text-sm backdrop-blur transition hover:-translate-y-0.5 hover:border-neutral-700 hover:bg-neutral-900"
-            >
-              Open in new tab ↗
-            </a>
-          </div>
-        </header>
-
-        <div className="relative overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/40 shadow-lg">
-          {/* Loading overlay */}
-          {isLoading && (
-            <div className="pointer-events-none absolute inset-0 z-10 grid place-items-center bg-neutral-950/60">
-              <div className="flex flex-col items-center gap-3 text-center">
-                <Spinner />
-                <p className="text-sm text-neutral-300">Warming up your demo…</p>
-                <p className="max-w-md text-xs text-neutral-400">
-                  Free tiers may cold-start. If it takes too long, click “Open in new tab”.
-                </p>
-              </div>
-            </div>
-          )}
-
-          {/* Iframe */}
-          {isIframeVisible ? (
-            <iframe
-              src={DEMO_URL}
-              className="h-[720px] w-full"
-              style={{ border: 0 }}
-              onLoad={() => setIsLoading(false)}
-              allow="clipboard-write; microphone; camera"
-              title="SMS Spam Classifier Demo"
-            />
-          ) : (
-            <div className="h-[720px] w-full" />
-          )}
-        </div>
-
-      </section>
+      <DemoSection />
 
       {/* Projects Grid */}
       <Projects />
@@ -196,7 +144,8 @@ function Hero() {
       </h1>
       <p className="mt-4 max-w-2xl text-neutral-300">
         Latest: an SMS spam detector trained on Kaggle (uciml/sms-spam-collection) with TF-IDF + Logistic Regression,
-        sub-1.5s p95 latency, and JSON artifacts under 1 MB.
+        sub-1.5s p95 latency, and JSON artifacts under 1 MB—plus a Walmart demand forecasting dashboard that retrains live
+        and holds MAPE around 3%.
       </p>
       <div className="mt-6 flex flex-wrap items-center gap-3">
         <a
@@ -214,6 +163,107 @@ function Hero() {
       </div>
       <GradientBackdrop />
     </section>
+  );
+}
+
+type DemoConfig = {
+  title: string;
+  description: string;
+  href: string;
+  iframeTitle: string;
+};
+
+function DemoSection() {
+  const demos: DemoConfig[] = [
+    {
+      title: SMS_DEMO_TITLE,
+      description: SMS_DEMO_DESC,
+      href: SMS_DEMO_URL,
+      iframeTitle: "SMS Spam Classifier Demo",
+    },
+    {
+      title: FORECAST_DEMO_TITLE,
+      description: FORECAST_DEMO_DESC,
+      href: FORECAST_DEMO_URL,
+      iframeTitle: "Demand Forecasting Demo",
+    },
+  ];
+
+  return (
+    <section id="demo" className="mx-auto max-w-6xl px-4 py-16">
+      <header className="mb-10 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h2 className="text-2xl font-semibold tracking-tight">Live demos</h2>
+          <p className="mt-1 text-sm text-neutral-400">
+            Both hosted on Hugging Face Spaces. Cold starts take a few seconds; the overlays fade once the iframe loads.
+          </p>
+        </div>
+      </header>
+
+      <div className="space-y-14">
+        {demos.map((demo) => (
+          <DemoEmbed key={demo.iframeTitle} config={demo} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function DemoEmbed({ config }: { config: DemoConfig }) {
+  const [isIframeVisible, setIsIframeVisible] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const timeout = setTimeout(() => setIsIframeVisible(true), 500);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  return (
+    <article className="space-y-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h3 className="text-xl font-semibold text-neutral-50">{config.title}</h3>
+          <p className="mt-1 text-neutral-400">{config.description}</p>
+        </div>
+        <div className="flex items-center gap-3">
+          <a
+            href={config.href}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-xl border border-neutral-800 px-4 py-2 text-sm backdrop-blur transition hover:-translate-y-0.5 hover:border-neutral-700 hover:bg-neutral-900"
+          >
+            Open in new tab ↗
+          </a>
+        </div>
+      </div>
+
+      <div className="relative overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/40 shadow-lg">
+        {isLoading && (
+          <div className="pointer-events-none absolute inset-0 z-10 grid place-items-center bg-neutral-950/60">
+            <div className="flex flex-col items-center gap-3 text-center">
+              <Spinner />
+              <p className="text-sm text-neutral-300">Warming up the demo…</p>
+              <p className="max-w-md text-xs text-neutral-400">
+                Free tiers may cold-start. If it takes too long, use the “Open in new tab” link.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {isIframeVisible ? (
+          <iframe
+            src={config.href}
+            className="h-[720px] w-full"
+            style={{ border: 0 }}
+            onLoad={() => setIsLoading(false)}
+            allow="clipboard-write; microphone; camera"
+            title={config.iframeTitle}
+          />
+        ) : (
+          <div className="h-[720px] w-full" />
+        )}
+      </div>
+    </article>
   );
 }
 

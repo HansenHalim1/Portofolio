@@ -22,11 +22,12 @@ export const PROJECTS: Project[] = [
   {
     slug: "demand-forecasting",
     title: "Demand Forecasting",
-    metric: "MAPE 21% → 12%",
-    desc: "Darts + XGBoost, Airflow, MLflow; Power BI dashboard for business users.",
+    metric: "MAPE ≈ 2.9%",
+    desc: "Gradient Boosting on aggregated Walmart weekly sales with retrainable Streamlit UI.",
     summary:
-      "Forecasting pipeline with classical models + MLflow tracking. Demo slot reserved for future embed (Tableau/Power BI).",
-    githubUrl: "https://github.com/HansenHalim1/retail-forecasting",
+      "Scikit-learn Gradient Boosting with lag/rolling features, trained on the Walmart dataset. The Hugging Face Space lets viewers retrain, inspect metrics, and generate forward forecasts in one place.",
+    demoUrl: "https://hansen-123-demandforcasting.hf.space",
+    githubUrl: "https://github.com/HansenHalim1/demand-forecasting",
   },
   {
     slug: "ticket-triage",
