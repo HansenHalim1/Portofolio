@@ -16,7 +16,7 @@ export const CV_EDUCATION = [
     program: "B.Sc. in Data Science",
     years: "2023 – 2027 (expected)",
     details:
-      "Probability & Statistics, Linear Algebra, Machine Learning, Data Engineering, Software Engineering.",
+      "Statistics, Linear Algebra, Machine Learning, Deep Learning, Data Engineering, Software Engineering, Model Deployment.",
   },
   { school: "SMA Sutomo 1 Medan", program: "Science Track", years: "2020 – 2023" },
   { school: "SMP Diponegoro Kisaran", years: "2017 – 2020" },
@@ -28,9 +28,9 @@ export const CV_PROJECTS = [
     title: "SMS Spam Classifier",
     timeframe: "2025",
     bullets: [
-      "Fine-tuned TF-IDF + Logistic Regression on Kaggle SMS Spam Collection; F1 ≥ 0.97 with artifact < 1 MB.",
-      "FastAPI inference API on Render with latency logging, token-level debug info, and JSON-configured artifacts.",
-      "Streamlit UI deployed to Hugging Face Spaces; embedded back into this Next.js portfolio with warm-up overlay.",
+      "Blended Kaggle corpora (tinu10kumar/sms-spam-dataset + gevabriel/indonesian-sms-spam), cleaned + vectorised via TF-IDF Logistic Regression (F1 ≥ 0.97, artifact <1 MB).",
+      "FastAPI inference service deployed on Render with latency telemetry, JSON artefacts, and top-token explanations for each prediction.",
+      "Streamlit front-end on Hugging Face Spaces and embedded iframe inside this Next.js portfolio for live demo access.",
     ],
     link: "https://github.com/HansenHalim1/SMS-Spam-Classifier",
   },
@@ -38,20 +38,21 @@ export const CV_PROJECTS = [
     title: "Demand Forecasting Pipeline",
     timeframe: "2025",
     bullets: [
-      "Built Darts + XGBoost time-series pipeline that reduced MAPE from 21% to 12% on retail demand data.",
-      "Scheduled retraining and ETL with Apache Airflow; tracked experiments in MLflow; surfaced insights via Power BI dashboard.",
-      "Implemented CI checks and documentation to support hand-off to business stakeholders.",
+      "Aggregated Walmart (Kaggle) weekly sales, engineered lag/rolling features, and trained Gradient Boosting regressor (MAPE ≈ 3%, MAE ≈ 1.4M).",
+      "Saved compact joblib artifacts + metadata for reproducible forecasting and published CLI scripts for training and inference.",
+      "Streamlit dashboard deployed to Hugging Face Spaces providing retrain + forecast buttons; documentation linked in portfolio README.",
     ],
-    link: "https://github.com/HansenHalim1/retail-forecasting",
+    link: "https://github.com/HansenHalim1/demand-forecasting",
   },
   {
-    title: "Ticket Triage Assistant",
+    title: "Support Copilot",
     timeframe: "2025",
     bullets: [
-      "Developed NLP classifier with SHAP explanations and FastAPI deployment, achieving +15 pts lift@10.",
-      "Added observability hooks, regression tests, and guardrails for production readiness.",
+      "FastAPI microservice on Railway orchestrating Gemini 2.5 Flash with structured JSON schema for intent, sentiment, priority, and draft replies.",
+      "Implements prompt grounding hooks, health checks, and configurable safety thresholds; ships with deployment-ready Dockerfile/Procfile.",
+      "Streamlit UI on Hugging Face Spaces (TicketCoPilot) + embedded iframe in portfolio for real-time demonstrations.",
     ],
-    link: "https://github.com/HansenHalim1/ticket-triage",
+    link: "https://github.com/HansenHalim1/support_copilot",
   },
 ];
 
@@ -75,7 +76,7 @@ export const CV_SKILLS = [
 ];
 
 export const CV_EXTRAS = [
-  "Open to AI/Data Science internships (Summer 2025 onward).",
+  "Open to AI/Data Science internships.",
   "Comfortable explaining models and metrics to non-technical stakeholders.",
   "Exploring NLP, forecasting, and end-to-end ML productization.",
 ];

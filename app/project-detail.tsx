@@ -47,13 +47,6 @@ export function ProjectDetailView({ project }: Props) {
           >
             View GitHub ↗
           </a>
-          <button
-            type="button"
-            onClick={() => router.push("/#contact")}
-            className="inline-flex items-center gap-2 rounded-xl border border-transparent bg-white/10 px-3 py-1.5 text-white transition hover:bg-white/15"
-          >
-            Discuss this project
-          </button>
         </div>
       </header>
 

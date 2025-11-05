@@ -61,3 +61,16 @@ python ../demand_forecasting/forecast.py \
 ```
 
 Install dependencies via `pip install -r ../demand_forecasting/requirements.txt`.
+
+## Support Copilot Demo
+
+The Support Copilot API lives in `../support_copilot/` and can be deployed to Railway following the
+instructions in that folder. To enable the embedded demo inside this Next.js app, add the deployed
+URL to `.env.local`:
+
+```bash
+NEXT_PUBLIC_SUPPORT_COPILOT_URL=https://your-service.up.railway.app
+```
+
+Restart `npm run dev` after setting the variable. The Support Copilot project page will then issue
+requests to `/triage` on that endpoint.

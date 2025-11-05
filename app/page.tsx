@@ -8,10 +8,15 @@ const SMS_DEMO_URL = "https://hansen-123-sms-spam-classifier.hf.space";
 const SMS_DEMO_TITLE = "SMS Spam Classifier — TF-IDF + Logistic Regression";
 const SMS_DEMO_DESC =
   "Paste an SMS, tap Predict, and see latency + top contributing tokens. Hosted via Streamlit on Hugging Face Spaces.";
+const SMS_HEALTH_URL = "https://sms-spam-classifier-dc80.onrender.com/health";
 const FORECAST_DEMO_URL = "https://hansen-123-demandforcasting.hf.space";
-const FORECAST_DEMO_TITLE = "Demand Forecasting — Walmart Sales Dashboard";
+const FORECAST_DEMO_TITLE = "Demand Forecasting — Walmart (Kaggle) Dashboard";
 const FORECAST_DEMO_DESC =
-  "Retrain a Gradient Boosting regressor on aggregated Walmart weekly sales, inspect validation metrics, and generate rolling forecasts.";
+  "Retrain a Gradient Boosting regressor on Kaggle’s yasserh/walmart-dataset (aggregated weekly sales), inspect validation metrics, and generate rolling forecasts.";
+const COPILOT_DEMO_URL = "https://hansen-123-ticketcopilot.hf.space";
+const COPILOT_DEMO_TITLE = "Support Copilot — Ticket Intelligence";
+const COPILOT_DEMO_DESC =
+  "Gemini 2.5 Flash triage with summaries, suggested replies, and recommended actions. Hosted on Hugging Face Spaces.";
 const CV_URL = "/cv";
 const GITHUB_URL = "https://github.com/HansenHalim1";
 const LINKEDIN_URL = "https://www.linkedin.com/in/hansen-halim-2b7484274/";
@@ -35,6 +40,14 @@ function PortfolioContent() {
 
   const selectedSlug = slugFromPath ?? queryProject;
   const selectedProject = PROJECTS.find((project) => project.slug === selectedSlug);
+
+  React.useEffect(() => {
+    const controller = new AbortController();
+    fetch(SMS_HEALTH_URL, { signal: controller.signal, cache: "no-store", mode: "no-cors" }).catch(() => {
+      // Render free tier may block CORS or be asleep; failures are fine here.
+    });
+    return () => controller.abort();
+  }, []);
 
   if (pathname === "/cv" || viewMode === "cv") {
     return (
@@ -143,9 +156,10 @@ function Hero() {
         I build usable AI demos: fast inference APIs, Streamlit/HF Spaces, and polished product surfaces.
       </h1>
       <p className="mt-4 max-w-2xl text-neutral-300">
-        Latest: an SMS spam detector trained on Kaggle (uciml/sms-spam-collection) with TF-IDF + Logistic Regression,
-        sub-1.5s p95 latency, and JSON artifacts under 1 MB—plus a Walmart demand forecasting dashboard that retrains live
-        and holds MAPE around 3%.
+        Latest: an SMS spam detector trained on a blended Kaggle corpus
+        (tinu10kumar/sms-spam-dataset + gevabriel/indonesian-sms-spam) with TF-IDF + Logistic Regression, keeping p95
+        latency under 1.5s and artifacts around 1 MB—plus a Walmart demand forecasting dashboard built on the
+        yasserh/walmart-dataset that retrains live and holds MAPE around 3%.
       </p>
       <div className="mt-6 flex flex-wrap items-center gap-3">
         <a
@@ -187,6 +201,12 @@ function DemoSection() {
       href: FORECAST_DEMO_URL,
       iframeTitle: "Demand Forecasting Demo",
     },
+    {
+      title: COPILOT_DEMO_TITLE,
+      description: COPILOT_DEMO_DESC,
+      href: COPILOT_DEMO_URL,
+      iframeTitle: "Support Copilot Demo",
+    },
   ];
 
   return (
@@ -195,7 +215,7 @@ function DemoSection() {
         <div>
           <h2 className="text-2xl font-semibold tracking-tight">Live demos</h2>
           <p className="mt-1 text-sm text-neutral-400">
-            Both hosted on Hugging Face Spaces. Cold starts take a few seconds; the overlays fade once the iframe loads.
+            Hosted on Hugging Face Spaces. Cold starts take a few seconds; the overlays fade once the iframe loads.
           </p>
         </div>
       </header>
@@ -308,14 +328,14 @@ function About() {
           <ul className="mt-3 list-disc pl-5 text-sm text-neutral-400">
             <li>LLM/RAG (LangChain/LlamaIndex), vector DBs, prompt eval</li>
             <li>Forecasting & anomaly detection with solid backtesting</li>
-            <li>APIs & orchestration (FastAPI, n8n) with auth & logging</li>
+            <li>APIs & orchestration (FastAPI, Railway, n8n) with auth & logging</li>
           </ul>
         </div>
         <div className="rounded-2xl border border-neutral-800 bg-neutral-900/40 p-5 md:col-span-2">
           <h3 className="mb-1 text-lg font-medium">Stack</h3>
           <p className="text-neutral-300">
-            Python, SQL, scikit-learn, PyTorch/TensorFlow, Darts/Prophet, FastAPI, Docker, MLflow. Cloud: Vercel
-            (frontend), Hugging Face (demo), GCP/AWS basics, Render.
+            Python, SQL, scikit-learn, PyTorch/TensorFlow, Darts/Prophet, FastAPI, Docker, MLflow. Cloud & hosting: Vercel
+            (frontend), Hugging Face, Railway, Render, GCP/AWS basics.
           </p>
         </div>
       </div>
