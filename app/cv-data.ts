@@ -8,7 +8,19 @@ export const CV_CONTACT = {
 };
 
 export const CV_SUMMARY =
-  "Data Science undergraduate who prototypes end-to-end ML experiences—collecting data, training models, shipping FastAPI endpoints, and wrapping demos in Streamlit/Next.js.";
+  "Data Science undergraduate who prototypes end-to-end ML experiences, collecting data, training models, shipping FastAPI endpoints, and wrapping demos in Streamlit/Next.js.";
+
+export const CV_EXPERIENCE = [
+  {
+    role: "Activist",
+    organization: "Data Science Club",
+    years: "2023 – 2024",
+    bullets: [
+      "Designed and led monthly classes covering Python fundamentals, pandas, and introductory machine learning for new club members.",
+      "Mentored peers on mini-projects, providing code reviews and guidance on best practices for reproducible analysis.",
+    ],
+  },
+];
 
 export const CV_EDUCATION = [
   {
@@ -16,11 +28,8 @@ export const CV_EDUCATION = [
     program: "B.Sc. in Data Science",
     years: "2023 – 2027 (expected)",
     details:
-      "Statistics, Linear Algebra, Machine Learning, Deep Learning, Data Engineering, Software Engineering, Model Deployment.",
+      "Relevant coursework: Statistics, Linear Algebra, Machine Learning, Deep Learning, Data Engineering, Software Engineering, Model Deployment, Database Technology, Big Data, Text Mining.",
   },
-  { school: "SMA Sutomo 1 Medan", program: "Science Track", years: "2020 – 2023" },
-  { school: "SMP Diponegoro Kisaran", years: "2017 – 2020" },
-  { school: "SD Diponegoro Kisaran", years: "2011 – 2017" },
 ];
 
 export const CV_PROJECTS = [
@@ -28,8 +37,8 @@ export const CV_PROJECTS = [
     title: "SMS Spam Classifier",
     timeframe: "2025",
     bullets: [
-      "Blended Kaggle corpora (tinu10kumar/sms-spam-dataset + gevabriel/indonesian-sms-spam), cleaned + vectorised via TF-IDF Logistic Regression (F1 ≥ 0.97, artifact <1 MB).",
-      "FastAPI inference service deployed on Render with latency telemetry, JSON artefacts, and top-token explanations for each prediction.",
+      "Blended Kaggle corpora (tinu10kumar/sms-spam-dataset + gevabriel/indonesian-sms-spam), cleaned and vectorised via TF-IDF Logistic Regression (F1 >= 0.97, artifact < 1 MB).",
+      "FastAPI inference service deployed on Render with latency telemetry, JSON artifacts, and top-token explanations for each prediction.",
       "Streamlit front-end on Hugging Face Spaces and embedded iframe inside this Next.js portfolio for live demo access.",
     ],
     link: "https://github.com/HansenHalim1/SMS-Spam-Classifier",
@@ -38,8 +47,8 @@ export const CV_PROJECTS = [
     title: "Demand Forecasting Pipeline",
     timeframe: "2025",
     bullets: [
-      "Aggregated Walmart (Kaggle) weekly sales, engineered lag/rolling features, and trained Gradient Boosting regressor (MAPE ≈ 3%, MAE ≈ 1.4M).",
-      "Saved compact joblib artifacts + metadata for reproducible forecasting and published CLI scripts for training and inference.",
+      "Aggregated Walmart (Kaggle) weekly sales, engineered lag and rolling features, and trained Gradient Boosting regressor (MAPE ~ 3%, MAE ~ 1.4M).",
+      "Saved compact joblib artifacts and metadata for reproducible forecasting and published CLI scripts for training and inference.",
       "Streamlit dashboard deployed to Hugging Face Spaces providing retrain + forecast buttons; documentation linked in portfolio README.",
     ],
     link: "https://github.com/HansenHalim1/demand-forecasting",
@@ -77,6 +86,14 @@ export const CV_SKILLS = [
 
 export const CV_EXTRAS = [
   "Open to AI/Data Science internships.",
+  "Actively expanding my skillset.",
   "Comfortable explaining models and metrics to non-technical stakeholders.",
   "Exploring NLP, forecasting, and end-to-end ML productization.",
+  "Languages: Indonesian (native), English (professional working proficiency).",
+];
+
+export const CV_PRO_SKILLS = [
+  "Translate complex metrics and outcomes into plain-language updates for product and business stakeholders.",
+  "Rapid ML prototyping: deliver data pipelines, APIs, and demos on tight timelines with deployment checklists.",
+  "Growth mindset: iterate quickly on feedback and adopt new tooling when projects demand it.",
 ];

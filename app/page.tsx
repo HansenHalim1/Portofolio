@@ -5,16 +5,16 @@ import Link from "next/link";
 import { useSearchParams, usePathname } from "next/navigation";
 
 const SMS_DEMO_URL = "https://hansen-123-sms-spam-classifier.hf.space";
-const SMS_DEMO_TITLE = "SMS Spam Classifier — TF-IDF + Logistic Regression";
+const SMS_DEMO_TITLE = "SMS Spam Classifier - TF-IDF + Logistic Regression";
 const SMS_DEMO_DESC =
   "Paste an SMS, tap Predict, and see latency + top contributing tokens. Hosted via Streamlit on Hugging Face Spaces.";
 const SMS_HEALTH_URL = "https://sms-spam-classifier-dc80.onrender.com/health";
 const FORECAST_DEMO_URL = "https://hansen-123-demandforcasting.hf.space";
-const FORECAST_DEMO_TITLE = "Demand Forecasting — Walmart (Kaggle) Dashboard";
+const FORECAST_DEMO_TITLE = "Demand Forecasting - Walmart (Kaggle) Dashboard";
 const FORECAST_DEMO_DESC =
   "Retrain a Gradient Boosting regressor on Kaggle’s yasserh/walmart-dataset (aggregated weekly sales), inspect validation metrics, and generate rolling forecasts.";
 const COPILOT_DEMO_URL = "https://hansen-123-ticketcopilot.hf.space";
-const COPILOT_DEMO_TITLE = "Support Copilot — Ticket Intelligence";
+const COPILOT_DEMO_TITLE = "Support Copilot - Ticket Intelligence";
 const COPILOT_DEMO_DESC =
   "Gemini 2.5 Flash triage with summaries, suggested replies, and recommended actions. Hosted on Hugging Face Spaces.";
 const CV_URL = "/cv";
@@ -158,7 +158,7 @@ function Hero() {
       <p className="mt-4 max-w-2xl text-neutral-300">
         Latest: an SMS spam detector trained on a blended Kaggle corpus
         (tinu10kumar/sms-spam-dataset + gevabriel/indonesian-sms-spam) with TF-IDF + Logistic Regression, keeping p95
-        latency under 1.5s and artifacts around 1 MB—plus a Walmart demand forecasting dashboard built on the
+        latency under 1.5s and artifacts around 1 MB, plus a Walmart demand forecasting dashboard built on the
         yasserh/walmart-dataset that retrains live and holds MAPE around 3%.
       </p>
       <div className="mt-6 flex flex-wrap items-center gap-3">
